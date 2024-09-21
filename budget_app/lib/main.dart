@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,37 +10,71 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
+    return ChangeNotifierProvider(
+      create: (context) => MyAppState(),
+      child: MaterialApp(
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+          useMaterial3: true,
+        ),
+        home: LoginPage(),
       ),
-      home: const MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class MyAppState extends ChangeNotifier {}
 
+class LoginPage extends StatelessWidget {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'Login Page',
+            ),
+            Text(
+              '',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  _navigateFromLogin(context);
+                },
+                child: Text("To Home Screen"))
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _navigateFromLogin(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => MainPage()));
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  var selectedIndex = 0;
+class MainPage extends StatefulWidget {
+  @override
+  State<MainPage> createState() => _MainPage();
+}
 
+class _MainPage extends State<MainPage> {
+  var selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = TestPageHome();
-        break;
-      case 1:
         page = TestPage2();
         break;
-      case 2:
+      case 1:
         page = TestPage3();
         break;
       default:
@@ -57,12 +92,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   label: Text('Home'),
                 ),
                 NavigationRailDestination(
-                  icon: Icon(Icons.favorite),
+                  icon: Icon(Icons.monetization_on),
                   label: Text('Test1'),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.fort),
-                  label: Text('Test2'),
                 ),
               ],
               selectedIndex: selectedIndex,
@@ -80,31 +111,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class TestPageHome extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Test Page Homepage',
-            ),
-            Text(
-              '',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
       ),
     );
   }
