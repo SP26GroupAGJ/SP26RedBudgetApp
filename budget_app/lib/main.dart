@@ -45,18 +45,63 @@ class LoginPage extends StatelessWidget {
             ),
             ElevatedButton(
                 onPressed: () {
-                  _navigateFromLogin(context);
+                  _navigateToMain(context);
                 },
-                child: Text("To Home Screen"))
+                child: Text("To Home Screen")),
+            ElevatedButton(
+                onPressed: () {
+                  _navigateToCreateAcct(context);
+                },
+                child: Text("To Create Account")),
           ],
         ),
       ),
     );
   }
 
-  void _navigateFromLogin(BuildContext context) {
+  void _navigateToMain(BuildContext context) {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => MainPage()));
+  }
+
+  void _navigateToCreateAcct(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => CreateAcctPage()));
+  }
+}
+
+class CreateAcctPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'Create a Password',
+            ),
+            Text(
+              '',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  _navigateToLogin(context);
+                },
+                child: Text("Back To Login"))
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _navigateToLogin(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => LoginPage()));
   }
 }
 
