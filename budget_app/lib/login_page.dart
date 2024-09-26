@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
                 child: Text("To Home Screen")),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/login');
+                  Navigator.pushNamed(context, '/create_accnt');
                 },
                 child: Text("To Create Account")),
           ],

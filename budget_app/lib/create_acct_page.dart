@@ -20,9 +20,9 @@ class CreateAcctPage extends StatelessWidget {
             ),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/login');
+                  Navigator.pop(context);
                 },
-                child: Text("Back To Login"))
+                child: Text("Add New Account"))
           ],
         ),
       ),
