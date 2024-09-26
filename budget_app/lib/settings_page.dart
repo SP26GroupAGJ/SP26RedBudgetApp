@@ -5,21 +5,29 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/logout');
+            },
+          )
+        ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
+      body: Stack(
+        children: <Widget>[
+          Align(
+            alignment: Alignment.center,
+            child: const Text(
               'Settings Here',
             ),
-            Text(
-              '',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+          ),
+          Text(
+            '',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+        ],
       ),
     );
   }
