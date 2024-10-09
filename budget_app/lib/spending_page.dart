@@ -1,3 +1,5 @@
+import 'package:budget_app/transcation_card.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class SpendingPage extends StatelessWidget {
@@ -19,8 +21,22 @@ class SpendingPage extends StatelessWidget {
         children: <Widget>[
           Align(
             alignment: Alignment.center,
-            child: const Text(
-              'Spending Analysis Here',
+            child: Row(
+              children: [
+                Text('Spending Data'),
+                /*
+                ListView.builder(
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return TransactionCard(
+                      alignment: Alignment.centerRight,
+                      amount: 10.99,
+                      date: DateTime.now(),
+                      category: 'Groceries');
+                  },
+                )
+                */
+              ],
             ),
           ),
           Text(
