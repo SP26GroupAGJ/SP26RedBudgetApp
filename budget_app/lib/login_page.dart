@@ -10,9 +10,9 @@ class _LoginPage extends State<LoginPage> {
   final String password = "testPass";
   final userController = TextEditingController();
   final passController = TextEditingController();
-  
+
   @override
-  void dispose(){
+  void dispose() {
     userController.dispose();
     passController.dispose();
     super.dispose();
@@ -37,25 +37,28 @@ class _LoginPage extends State<LoginPage> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  if(userController.text==username && passController.text==password){
+                  if (userController.text == username &&
+                      passController.text == password) {
                     Navigator.pushReplacementNamed(context, '/login');
-                  }
-                  else{
-                    
-                  }
-                  
+                  } else {}
                 },
                 child: Text("To Home Screen")),
-            Padding(padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-            child: TextFormField(
-              decoration: const InputDecoration(border: UnderlineInputBorder(), labelText: 'Username'),
-              controller : userController,
-              ),),
-            Padding(padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-            child: TextFormField(
-              decoration: const InputDecoration(border: UnderlineInputBorder(), labelText: 'Password'),
-              controller: passController,
-            ),),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                    border: UnderlineInputBorder(), labelText: 'Username'),
+                controller: userController,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                    border: UnderlineInputBorder(), labelText: 'Password'),
+                controller: passController,
+              ),
+            ),
             ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/create_accnt');

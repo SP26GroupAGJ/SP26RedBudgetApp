@@ -1,4 +1,4 @@
-import 'package:budget_app/models/transaction_card_entity.dart';
+import 'package:budget_app/transaction_card_entity.dart';
 import 'package:flutter/material.dart';
 
 class TransactionCard extends StatelessWidget {
@@ -14,19 +14,18 @@ class TransactionCard extends StatelessWidget {
     return Align(
         alignment: alignment,
         child: Container(
+          margin: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 223, 223, 223),
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+          ),
+          padding: EdgeInsets.all(24),
           child: Column(
             children: [
               Text(
-                'Category: ${entity.category}}',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              Text(
-                'Transaction Date: ${entity.date}}',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              Text(
-                'Amount: ${entity.amount}}',
-                style: Theme.of(context).textTheme.headlineMedium,
+                'Category: ${entity.category}\nTransaction Date: ${entity.date}\nAmount: ${entity.amount}',
+                style: Theme.of(context).textTheme.bodyLarge,
+                textAlign: TextAlign.left,
               ),
             ],
           ),
