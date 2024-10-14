@@ -1,0 +1,50 @@
+[
+    {
+      "category": "Grocery",
+      "date": 20231013,
+      "amount": 19.99,
+      "id": "1"
+    },
+    {
+      "category": "Health and Wellness",
+      "date": 20231001,
+      "amount": 39.95,
+      "id": "2"
+    },
+    {
+      "category": "Dining Out",
+      "date": 20231012,
+      "amount": 19.99,
+      "id": "3"
+    },
+    {
+      "category": "Utilities",
+      "date": 20230929,
+      "amount": 34.63,
+      "id": "4"
+    },
+    {
+      "category": "Transportation",
+      "date": 20231013,
+      "amount": 53.21,
+      "id": "5"
+    },
+    {
+      "category": "Housing",
+      "date": 20231001,
+      "amount": 517.00,
+      "id": "6"
+    },
+    {
+      "category": "Debt Payments",
+      "date": 20230929,
+      "amount": 75.43,
+      "id": "7"
+    },
+    {
+      "category": "Entertainment",
+      "date": 20231012,
+      "amount": 9.99,
+      "id": "8"
+    }
+  ]

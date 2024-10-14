@@ -6,8 +6,7 @@ class TransactionCard extends StatelessWidget {
   final Alignment alignment;
 
   const TransactionCard(
-      {Key? key, required this.alignment, required this.entity})
-      : super(key: key);
+      {super.key, required this.alignment, required this.entity});
 
   @override
   Widget build(BuildContext context) {
