@@ -19,14 +19,30 @@ class TransactionCard extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
           padding: EdgeInsets.all(24),
-          child: Column(
-            children: [
-              Text(
-                'Category: ${entity.category}\nTransaction Date: ${entity.date}\nAmount: ${entity.amount}',
-                style: Theme.of(context).textTheme.bodyLarge,
-                textAlign: TextAlign.left,
-              ),
-            ],
+          child: IntrinsicHeight(
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    entity.category,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                VerticalDivider(),
+                Expanded(
+                  child: Text('${entity.date}',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      textAlign: TextAlign.center),
+                ),
+                VerticalDivider(),
+                Expanded(
+                  child: Text('${entity.amount}',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      textAlign: TextAlign.right),
+                ),
+              ],
+            ),
           ),
         ));
   }

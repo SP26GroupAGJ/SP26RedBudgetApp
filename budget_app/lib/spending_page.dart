@@ -14,7 +14,6 @@ class _SpendingPageState extends State<SpendingPage> {
     String response = await DefaultAssetBundle.of(context)
         .loadString('assets/mock_transactions.json');
     final List<dynamic> decodedList = jsonDecode(response) as List;
-    print(response);
     final List<TransactionCardEntity> transactions =
         decodedList.map((listItem) {
       return TransactionCardEntity.fromJson(listItem);
