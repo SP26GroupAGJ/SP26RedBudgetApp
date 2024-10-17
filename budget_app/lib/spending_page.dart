@@ -39,12 +39,34 @@ class _SpendingPageState extends State<SpendingPage> {
             )
           ],
         ),
-        body: ListView.builder(
-            itemCount: _transactionsList.length,
-            itemBuilder: (context, index) {
-              return TransactionCard(
-                  entity: _transactionsList[index],
-                  alignment: Alignment.center);
-            }));
+        body: Column(
+          children: [
+            SizedBox(
+                height: MediaQuery.sizeOf(context).height / 2,
+                width: MediaQuery.sizeOf(context).width,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surfaceDim,
+                    ),
+                    child: Text('Chart here'),
+                  ),
+                )),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              child: Divider(),
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: _transactionsList.length,
+                  itemBuilder: (context, index) {
+                    return TransactionCard(
+                        entity: _transactionsList[index],
+                        alignment: Alignment.center);
+                  }),
+            ),
+          ],
+        ));
   }
 }
