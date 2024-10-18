@@ -1,0 +1,32 @@
+[
+    {
+      "category": "Grocery",
+      "startDate": 20241001,
+      "total": 350.0,
+      "interval": 31
+    },
+    {
+      "category": "Dining Out",
+      "startDate": 20241001,
+      "total": 75.0,
+      "interval": 31
+    },
+    {
+      "category": "Utilities",
+      "startDate": 20241001,
+      "total": 120.0,
+      "interval": 31
+    },
+    {
+      "category": "Transportation",
+      "startDate": 20241001,
+      "total": 400.0,
+      "interval": 31
+    },
+    {
+      "category": "Entertainment",
+      "startDate": 20241001,
+      "total": 50.0,
+      "interval": 31
+    }
+  ]

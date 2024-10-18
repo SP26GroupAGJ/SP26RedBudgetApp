@@ -22,4 +22,5 @@ dev_dependencies:
 flutter:
   assets:
     - assets/mock_transactions.json
+    - assets/mock_budgets.json
   uses-material-design: true
