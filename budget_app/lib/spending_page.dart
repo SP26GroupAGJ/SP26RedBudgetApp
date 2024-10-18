@@ -30,6 +30,7 @@ class _SpendingPageState extends State<SpendingPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(style: TextStyle(fontSize: 18), 'Spending Analysis'),
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.logout),

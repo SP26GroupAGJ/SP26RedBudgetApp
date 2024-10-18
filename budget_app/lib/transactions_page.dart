@@ -31,6 +31,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(style: TextStyle(fontSize: 18), 'Recent Transactions'),
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.logout),
@@ -40,12 +41,18 @@ class _TransactionsPageState extends State<TransactionsPage> {
             )
           ],
         ),
-        body: ListView.builder(
-            itemCount: _transactionsList.length,
-            itemBuilder: (context, index) {
-              return TransactionCard(
-                  entity: _transactionsList[index],
-                  alignment: Alignment.center);
-            }));
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                  itemCount: _transactionsList.length,
+                  itemBuilder: (context, index) {
+                    return TransactionCard(
+                        entity: _transactionsList[index],
+                        alignment: Alignment.center);
+                  }),
+            ),
+          ],
+        ));
   }
 }
