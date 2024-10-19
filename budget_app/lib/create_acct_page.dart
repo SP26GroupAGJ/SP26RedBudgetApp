@@ -1,8 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:budget_app/database_helper.dart';
 
-class CreateAcctPage extends StatelessWidget {
+class CreateAcctPage extends StatefulWidget {
+  @override
+  State<CreateAcctPage> createState() => _CreateAcctPage();
+}
+
+class _CreateAcctPage extends State<CreateAcctPage> {
+  String username = "";
+  String password = "";
+  final userController = TextEditingController();
+  final passController = TextEditingController();
+
+  @override
+  void dispose() {
+    userController.dispose();
+    passController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
+    DatabaseHelper myDBHelper = DatabaseHelper();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -18,11 +36,41 @@ class CreateAcctPage extends StatelessWidget {
               '',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            //Text field for users to enter their username
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                    border: UnderlineInputBorder(), labelText: 'Username'),
+                controller: userController,
+              ),
+            ),
+            //Text field for users to enter their password
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                    border: UnderlineInputBorder(), labelText: 'Password'),
+                controller: passController,
+              ),
+            ),
             ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
+                onPressed: () async {
+                  if(userController.text !="" && passController.text != ""){
+                    myDBHelper.connectDatabase();
+                    username = userController.text;
+                    password = passController.text;
+                    String query = 'INSERT INTO Users Values($username, $password)';
+                    String result = await myDBHelper.databaseConnection.writeData(query);
+                    print(result);
+                  }                  
                 },
-                child: Text("Add New Account"))
+                child: Text("Create Account")),
+                ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/logout');
+                },
+                child: Text("Login")),
           ],
         ),
       ),

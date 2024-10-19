@@ -35,14 +35,7 @@ class _LoginPage extends State<LoginPage> {
               '',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            ElevatedButton(
-                onPressed: () {
-                  if (userController.text == username &&
-                      passController.text == password) {
-                    Navigator.pushReplacementNamed(context, '/login');
-                  } else {}
-                },
-                child: Text("To Home Screen")),
+            //Text field for users to enter their username
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
               child: TextFormField(
@@ -51,6 +44,7 @@ class _LoginPage extends State<LoginPage> {
                 controller: userController,
               ),
             ),
+            //Text field for users to enter their password
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
               child: TextFormField(
@@ -59,11 +53,21 @@ class _LoginPage extends State<LoginPage> {
                 controller: passController,
               ),
             ),
+
+            ElevatedButton(
+                onPressed: () {
+                  if (userController.text == username &&
+                      passController.text == password) {
+                    Navigator.pushReplacementNamed(context, '/login');
+                  } else {}
+                },
+                child: Text("Login")),
+
             ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/create_accnt');
                 },
-                child: Text("To Create Account")),
+                child: Text("Create Account")),
           ],
         ),
       ),
