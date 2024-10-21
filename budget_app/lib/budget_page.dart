@@ -100,7 +100,7 @@ class _BudgetPageState extends State<BudgetPage> {
                         )),
                     IconButton(
                         onPressed: () {
-                          print('Icon press');
+                          Navigator.pushNamed(context, '/api');
                         },
                         icon: const Icon(
                           Icons.sync,

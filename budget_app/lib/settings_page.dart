@@ -36,8 +36,9 @@ class SettingsPage extends StatelessWidget {
                       'Account'),
                   Divider(),
                   TextButtonCard(
-                      title: "Username",
-                      subtitle: "Edit username and personal information"),
+                    title: "Username",
+                    subtitle: "Edit username and personal information",
+                  ),
                   TextButtonCard(
                       title: "Password", subtitle: "Change password"),
                   TextButtonCard(

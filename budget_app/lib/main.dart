@@ -1,3 +1,4 @@
+import 'package:budget_app/api_connect_page.dart';
 import 'package:budget_app/budget_page.dart';
 import 'package:budget_app/create_acct_page.dart';
 import 'package:budget_app/login_page.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
           '/transactions': (context) => TransactionsPage(),
           '/bugdet': (context) => BudgetPage(),
           '/spending': (context) => SpendingPage(),
+          '/api': (context) => ApiConnectPage(),
         },
       ),
     );
