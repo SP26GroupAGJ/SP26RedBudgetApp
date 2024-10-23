@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:budget_app/budget_card.dart';
 import 'package:budget_app/budget_card_entity.dart';
+import 'package:budget_app/transaction_card_entity.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class BudgetPage extends StatefulWidget {
@@ -11,22 +13,81 @@ class BudgetPage extends StatefulWidget {
 
 class _BudgetPageState extends State<BudgetPage> {
   List<BudgetCardEntity> _budgetList = [];
+  List<TransactionCardEntity> _transactionsList = [];
+  List<BarChartGroupData> _budgetBars = [];
+
   _loadInitBudgets(context) async {
     String response = await DefaultAssetBundle.of(context)
         .loadString('assets/mock_budgets.json');
     final List<dynamic> decodedList = jsonDecode(response) as List;
-    final List<BudgetCardEntity> transactions = decodedList.map((listItem) {
+    final List<BudgetCardEntity> budgets = decodedList.map((listItem) {
       return BudgetCardEntity.fromJson(listItem);
     }).toList();
 
     setState(() {
-      _budgetList = transactions;
+      _budgetList = budgets;
     });
+  }
+
+  _loadInitTransactions(context) async {
+    String response = await DefaultAssetBundle.of(context)
+        .loadString('assets/mock_transactions.json');
+    final List<dynamic> decodedList = jsonDecode(response) as List;
+    final List<TransactionCardEntity> transactions =
+        decodedList.map((listItem) {
+      return TransactionCardEntity.fromJson(listItem);
+    }).toList();
+
+    setState(() {
+      _transactionsList = transactions;
+    });
+  }
+
+  List<String> _getBudgetCategories(List<BudgetCardEntity> budgets) {
+    List<String> catgs = [];
+    budgets.forEach((budget) {
+      catgs.add(budget.category);
+    });
+    return catgs.toSet().toList();
+  }
+
+  List<BarChartGroupData> _buildBars(List<BudgetCardEntity> budgets,
+      List<TransactionCardEntity> transactions) {
+    List<BarChartGroupData> bars = [];
+    if (budgets.length == 0 || transactions.length == 0) {
+      return bars;
+    }
+    print(_budgetBars.length);
+    List<double> catgTotals = [];
+    print(catgTotals);
+    budgets.forEach((budget) {
+      double catSum = 0;
+      transactions.forEach((transact) {
+        if (transact.category == budget.category) {
+          catSum += transact.amount;
+        }
+      });
+      catgTotals.add(catSum);
+    });
+
+    for (int i = 0; i < catgTotals.length; i++) {
+      bars.add(makeGroupData(i, budgets[i].total, catgTotals[i]));
+    }
+    return bars;
+  }
+
+  BarChartGroupData makeGroupData(int x, double y1, double y2) {
+    return BarChartGroupData(x: x, barRods: [
+      BarChartRodData(toY: y1),
+      BarChartRodData(toY: y2),
+    ]);
   }
 
   @override
   Widget build(BuildContext context) {
     _loadInitBudgets(context);
+    _loadInitTransactions(context);
+    var bars = _buildBars(_budgetList, _transactionsList);
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -73,7 +134,20 @@ class _BudgetPageState extends State<BudgetPage> {
                   child: SizedBox(
                     height: MediaQuery.sizeOf(context).height / 3,
                     width: MediaQuery.sizeOf(context).width - 40,
-                    child: Text('bar graph here'),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: BarChart(BarChartData(
+                        titlesData: FlTitlesData(
+                            show: true,
+                            bottomTitles: AxisTitles(
+                                sideTitles: SideTitles(
+                              showTitles: true,
+                              reservedSize: 30,
+                              getTitlesWidget: getTitles,
+                            ))),
+                        barGroups: bars,
+                      )),
+                    ),
                   ),
                 ),
               ),
@@ -131,5 +205,20 @@ class _BudgetPageState extends State<BudgetPage> {
             ],
           ),
         ));
+  }
+
+  Widget getTitles(double value, TitleMeta meta) {
+    final style = TextStyle(fontSize: 14);
+    final titles = _getBudgetCategories(_budgetList);
+
+    final Widget text = Text(
+      titles[value.toInt()],
+      style: style,
+    );
+    return SideTitleWidget(
+      axisSide: meta.axisSide,
+      space: 14,
+      child: text,
+    );
   }
 }

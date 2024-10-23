@@ -18,7 +18,6 @@ class _ApiConnectPageState extends State<ApiConnectPage> {
 
   _generateToken() async {
     // request link token from server
-
     setState(() {});
   }
 
