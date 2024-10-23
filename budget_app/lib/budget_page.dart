@@ -136,17 +136,30 @@ class _BudgetPageState extends State<BudgetPage> {
                     width: MediaQuery.sizeOf(context).width - 40,
                     child: Padding(
                       padding: const EdgeInsets.only(top: 20),
-                      child: BarChart(BarChartData(
-                        titlesData: FlTitlesData(
+                      child: BarChart(
+                        BarChartData(
+                          titlesData: FlTitlesData(
                             show: true,
                             bottomTitles: AxisTitles(
-                                sideTitles: SideTitles(
-                              showTitles: true,
-                              reservedSize: 30,
-                              getTitlesWidget: getTitles,
-                            ))),
-                        barGroups: bars,
-                      )),
+                              sideTitles: SideTitles(
+                                showTitles: true,
+                                reservedSize: 30,
+                                getTitlesWidget: getTitles,
+                              ),
+                            ),
+                            leftTitles: const AxisTitles(
+                                sideTitles: SideTitles(showTitles: false)),
+                            rightTitles: const AxisTitles(
+                                sideTitles: SideTitles(showTitles: false)),
+                            topTitles: const AxisTitles(
+                                sideTitles: SideTitles(showTitles: false)),
+                          ),
+                          borderData: FlBorderData(show: false),
+                          gridData: const FlGridData(show: false),
+                          alignment: BarChartAlignment.spaceAround,
+                          barGroups: bars,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -211,9 +224,12 @@ class _BudgetPageState extends State<BudgetPage> {
     final style = TextStyle(fontSize: 14);
     final titles = _getBudgetCategories(_budgetList);
 
-    final Widget text = Text(
-      titles[value.toInt()],
-      style: style,
+    final Widget text = SizedBox(
+      width: 50,
+      child: Text(
+        titles[value.toInt()],
+        style: style,
+      ),
     );
     return SideTitleWidget(
       axisSide: meta.axisSide,
