@@ -15,6 +15,7 @@ class _BudgetPageState extends State<BudgetPage> {
   List<BudgetCardEntity> _budgetList = [];
   List<TransactionCardEntity> _transactionsList = [];
   List<BarChartGroupData> _budgetBars = [];
+  final barWidth = 8.0;
 
   _loadInitBudgets(context) async {
     String response = await DefaultAssetBundle.of(context)
@@ -77,9 +78,15 @@ class _BudgetPageState extends State<BudgetPage> {
   }
 
   BarChartGroupData makeGroupData(int x, double y1, double y2) {
+    Color colorComp = Colors.grey;
+    if (y1 < y2) {
+      colorComp = Colors.red;
+    } else {
+      colorComp = Colors.lightGreen;
+    }
     return BarChartGroupData(x: x, barRods: [
-      BarChartRodData(toY: y1),
-      BarChartRodData(toY: y2),
+      BarChartRodData(toY: y1, width: barWidth),
+      BarChartRodData(toY: y2, color: colorComp, width: barWidth),
     ]);
   }
 
@@ -127,38 +134,33 @@ class _BudgetPageState extends State<BudgetPage> {
                   )),
               Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surfaceDim,
-                  ),
-                  child: SizedBox(
-                    height: MediaQuery.sizeOf(context).height / 3,
-                    width: MediaQuery.sizeOf(context).width - 40,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: BarChart(
-                        BarChartData(
-                          titlesData: FlTitlesData(
-                            show: true,
-                            bottomTitles: AxisTitles(
-                              sideTitles: SideTitles(
-                                showTitles: true,
-                                reservedSize: 30,
-                                getTitlesWidget: getTitles,
-                              ),
+                child: SizedBox(
+                  height: MediaQuery.sizeOf(context).height / 3,
+                  width: MediaQuery.sizeOf(context).width - 40,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: BarChart(
+                      BarChartData(
+                        titlesData: FlTitlesData(
+                          show: true,
+                          bottomTitles: AxisTitles(
+                            sideTitles: SideTitles(
+                              showTitles: true,
+                              reservedSize: 30,
+                              getTitlesWidget: getTitles,
                             ),
-                            leftTitles: const AxisTitles(
-                                sideTitles: SideTitles(showTitles: false)),
-                            rightTitles: const AxisTitles(
-                                sideTitles: SideTitles(showTitles: false)),
-                            topTitles: const AxisTitles(
-                                sideTitles: SideTitles(showTitles: false)),
                           ),
-                          borderData: FlBorderData(show: false),
-                          gridData: const FlGridData(show: false),
-                          alignment: BarChartAlignment.spaceAround,
-                          barGroups: bars,
+                          leftTitles: const AxisTitles(
+                              sideTitles: SideTitles(showTitles: false)),
+                          rightTitles: const AxisTitles(
+                              sideTitles: SideTitles(showTitles: false)),
+                          topTitles: const AxisTitles(
+                              sideTitles: SideTitles(showTitles: false)),
                         ),
+                        borderData: FlBorderData(show: false),
+                        gridData: const FlGridData(show: false),
+                        alignment: BarChartAlignment.spaceAround,
+                        barGroups: bars,
                       ),
                     ),
                   ),
@@ -221,7 +223,7 @@ class _BudgetPageState extends State<BudgetPage> {
   }
 
   Widget getTitles(double value, TitleMeta meta) {
-    final style = TextStyle(fontSize: 14);
+    final style = TextStyle(fontSize: 14, overflow: TextOverflow.ellipsis);
     final titles = _getBudgetCategories(_budgetList);
 
     final Widget text = SizedBox(

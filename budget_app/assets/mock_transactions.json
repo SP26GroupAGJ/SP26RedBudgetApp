@@ -2,7 +2,13 @@
     {
       "category": "Grocery",
       "date": 20231013,
-      "amount": 19.99,
+      "amount": 50.99,
+      "id": "1"
+    },
+    {
+      "category": "Grocery",
+      "date": 20231029,
+      "amount": 100.99,
       "id": "1"
     },
     {
@@ -14,7 +20,7 @@
     {
       "category": "Dining Out",
       "date": 20231012,
-      "amount": 19.99,
+      "amount": 199.99,
       "id": "3"
     },
     {
@@ -26,7 +32,7 @@
     {
       "category": "Transportation",
       "date": 20231013,
-      "amount": 53.21,
+      "amount": 325.21,
       "id": "5"
     },
     {
@@ -44,7 +50,7 @@
     {
       "category": "Entertainment",
       "date": 20231012,
-      "amount": 9.99,
+      "amount": 79.99,
       "id": "8"
     }
   ]
