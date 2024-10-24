@@ -60,7 +60,8 @@ class _CreateAcctPage extends State<CreateAcctPage> {
                     myDBHelper.connectDatabase();
                     username = userController.text;
                     password = passController.text;
-                    String query = 'INSERT INTO Users Values($username, $password)';
+                    String query = 'INSERT INTO Users Values(\'$username\', \'$password\')';
+                    print(query);
                     String result = await myDBHelper.databaseConnection.writeData(query);
                     print(result);
                   }                  
