@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:budget_app/budget_card.dart';
 import 'package:budget_app/budget_card_entity.dart';
 import 'package:budget_app/transaction_card_entity.dart';
@@ -117,11 +118,13 @@ class _BudgetPageState extends State<BudgetPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 30),
-                          'Spending vs Targets'),
-                      SizedBox(width: 20),
+                      AutoSizeText(
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 30),
+                        'Spending vs Target',
+                        maxLines: 1,
+                      ),
+                      SizedBox(width: MediaQuery.sizeOf(context).width / 20),
                       IconButton(
                           onPressed: () {
                             print('Icon press');
