@@ -5,9 +5,9 @@ class DatabaseHelper {
   Future <void> connectDatabase () async{
     try{
         await databaseConnection.connect(
-        ip: '10.0.0.210',
+        ip: 'sp26redbudgetdatabase.cdgieoauqi86.us-east-1.rds.amazonaws.com',
         port: '1433',
-        databaseName: 'SP26_Red_Budget_app',
+        databaseName: 'Sp26RedBudgetapp',
         username: 'jAGsp26',
         password: 'WrhredBA',
         timeoutInSeconds: 15,
@@ -19,6 +19,14 @@ class DatabaseHelper {
   Future <void> writeData (String query) async{
     try{
       await databaseConnection.writeData(query);
+    }
+    catch (e){
+      print(e.toString());
+    }
+  }
+  Future <void> getData (String query) async{
+    try{
+      await databaseConnection.getData(query);
     }
     catch (e){
       print(e.toString());

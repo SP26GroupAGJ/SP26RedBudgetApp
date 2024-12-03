@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:budget_app/database_helper.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -6,8 +7,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage> {
-  final String username = "testUser";
-  final String password = "testPass";
+  String username = "";
+  String password = "";
   final userController = TextEditingController();
   final passController = TextEditingController();
 
@@ -20,6 +21,7 @@ class _LoginPage extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    DatabaseHelper myDBHelper = DatabaseHelper();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -55,11 +57,19 @@ class _LoginPage extends State<LoginPage> {
             ),
 
             ElevatedButton(
-                onPressed: () {
-                  if (userController.text == username &&
-                      passController.text == password) {
-                    Navigator.pushReplacementNamed(context, '/login');
-                  } else {}
+                onPressed: () async  {
+                  if(userController.text !="" && passController.text != ""){
+                    myDBHelper.connectDatabase();
+                    username = userController.text;
+                    password = passController.text;
+                    String query = 'SELECT COUNT(*) FROM users WHERE username = \'$username\' AND password = \'$password\';';
+                    String result = await myDBHelper.databaseConnection.getData(query);
+                    print(result);
+                    if (result.contains("1")){
+                      if (!context.mounted) return;
+                      Navigator.pushNamed(context, '/login');
+                    }
+                  }  
                 },
                 child: Text("Login")),
 
